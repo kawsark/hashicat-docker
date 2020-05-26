@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hashicat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hashicat
+  template:
+    metadata:
+      name: hashicat
+      labels:
+        app: hashicat
+        version: v1
+    spec:
+      containers:
+        - name: app
+          image: kawsark/hashicat:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 80

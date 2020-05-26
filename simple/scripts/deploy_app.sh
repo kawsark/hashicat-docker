@@ -8,6 +8,8 @@
 [[ -z $WIDTH ]] && WIDTH=400
 [[ -z $HEIGHT ]] && HEIGHT=800
 
+mkdir -p /usr/local/apache2/htdocs
+
 cat << EOM > /usr/local/apache2/htdocs/index.html
 <html>
   <head><title>Meow!</title></head>
