@@ -1,0 +1,51 @@
+version: "3.3"
+services:
+
+  # Define the hashicat web service
+  hashicat-web:
+    image: kawsark/hashicat-web:0.0.1
+    environment:
+      DEBUG: "True"
+      URLSERVICE_URI: "http://10.6.0.5:9090"
+      METADATA_URI: "http://10.6.0.6:9090"
+      NAME: hashicat-web
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.3
+    ports:
+      - 30011:5000
+
+  # Define the hashicat url service
+  hashicat-url:
+    image: nicholasjackson/fake-service:v0.10.0
+    environment:
+      NAME: "hashicat-url"
+      MESSAGE: "{\"url\":\"http://placekitten.com/800/800\"}"
+      SERVER_TYPE: "http"
+      LISTEN_ADDR: 0.0.0.0:9090
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.5
+    ports:
+      - 30012:9090
+
+  # Define the hashicat metadata service
+  hashicat-metadata:
+    image: nicholasjackson/fake-service:v0.10.0
+    environment:
+      NAME: "hashicat-metadata"
+      MESSAGE: "{\"enable_ratings\":\"True\",\"caption\":\"Welcome to Nic's Meowlicious App\"}"
+      SERVER_TYPE: "http"
+      LISTEN_ADDR: 0.0.0.0:9090
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.6
+    ports:
+      - 30013:9090
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.6.0.0/16

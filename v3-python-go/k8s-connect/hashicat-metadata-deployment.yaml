@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hashicat-metadata
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hashicat-metadata
+  template:
+    metadata:
+      labels:
+        app: hashicat-metadata
+        version: v1
+      annotations:
+        'consul.hashicorp.com/connect-inject': 'true'  
+    spec:
+      containers:
+        - name: hashicat-metadata
+          image: nicholasjackson/fake-service:v0.10.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MESSAGE
+              value: "{\"enable_ratings\":\"True\",\"caption\":\"Welcome to Nic's Meowlicious App\"}"
+            - name: SERVER_TYPE
+              value: "http"
+            - name: NAME
+              value: "hashicat-metadata"
+            - name: LISTEN_ADDR
+              value: "0.0.0.0:9090"
+          ports:
+          - containerPort: 9090

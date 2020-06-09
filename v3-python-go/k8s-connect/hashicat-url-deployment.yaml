@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hashicat-url
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hashicat-url
+  template:
+    metadata:
+      labels:
+        app: hashicat-url
+        version: v1
+      annotations:
+        'consul.hashicorp.com/connect-inject': 'true'  
+    spec:
+      containers:
+        - name: hashicat-url
+          image: nicholasjackson/fake-service:v0.10.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MESSAGE
+              value: "{\"url\":\"http://placekitten.com/600/400\"}"
+            - name: SERVER_TYPE
+              value: "http"
+            - name: NAME
+              value: "hashicat-url"
+            - name: LISTEN_ADDR
+              value: "0.0.0.0:9090"
+          ports:
+          - containerPort: 9090

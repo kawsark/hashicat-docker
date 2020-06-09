@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+
+  # Define the hashicat web service
+  hashicat-web:
+    image: kawsark/hashicat-web:0.0.1
+    environment:
+      DEBUG: "True"
+      URLSERVICE_URI: "http://10.5.0.5:5000/url"
+      METADATA_URI: "http://10.5.0.5:5000/metadata"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.3
+    ports:
+      - 30011:5000
+
+  # Define the image service 
+  hashicat-image:
+    image: kawsark/hashicat-image:0.0.1
+    environment:
+      HASHICAT_URL: "http://placekitten.com/800/800"
+      HASHICAT_META: "Welcome to Garfield's Meowlicious app"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+    ports:
+      - 30012:5000
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16

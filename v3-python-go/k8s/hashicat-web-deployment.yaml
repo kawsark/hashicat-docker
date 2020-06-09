@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hashicat-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hashicat-web
+  template:
+    metadata:
+      labels:
+        app: hashicat-web
+        version: v1
+    spec:
+      containers:
+        - name: hashicat-web
+          image: kawsark/hashicat-web:0.0.1
+          imagePullPolicy: Always
+          env:
+            - name: DEBUG
+              value: "True"
+            - name: URLSERVICE_URI
+              value: "http://hashicat-url"
+            - name: METADATA_URI
+              value: "http://hashicat-metadata"
+          ports:
+          - containerPort: 5000

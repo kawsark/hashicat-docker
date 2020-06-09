@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hashicat
+  name: hashicat-v1
 spec:
   replicas: 1
   selector:

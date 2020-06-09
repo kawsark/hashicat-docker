@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hashicat-image
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hashicat-image
+  template:
+    metadata:
+      labels:
+        app: hashicat-image
+        version: v1
+    spec:
+      containers:
+        - name: hashicat-image
+          image: kawsark/hashicat-image:0.0.1
+          imagePullPolicy: Always
+          env:
+            - name: HASHICAT_URL
+              value: "http://placekitten.com/700/700"
+            - name: HASHICAT_META
+              value: "Welcome to Inaya's Meowlicious app"
+          ports:
+          - containerPort: 5000
