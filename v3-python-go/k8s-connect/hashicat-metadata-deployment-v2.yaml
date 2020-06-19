@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hashicat-metadata
+  name: hashicat-metadata-v2
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: hashicat-metadata
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: hashicat-metadata
-        version: v1
+        version: v2
       annotations:
         'consul.hashicorp.com/connect-inject': 'true'
         'consul.hashicorp.com/connect-service-protocol': 'http'
-        'consul.hashicorp.com/service-tags': 'v1'
-        'consul.hashicorp.com/service-meta-version': '1'
+        'consul.hashicorp.com/service-tags': 'v2'
+        'consul.hashicorp.com/service-meta-version': '2'
     spec:
       containers:
         - name: hashicat-metadata
@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: MESSAGE
-              value: "{\"enable_ratings\":\"False\",\"caption\":\"Welcome to Marc's Meowlicious App\"}"
+              value: "{\"enable_ratings\":\"True\",\"caption\":\"Welcome to Inaya's Meowlicious App\"}"
             - name: SERVER_TYPE
               value: "http"
             - name: NAME

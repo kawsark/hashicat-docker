@@ -24,9 +24,9 @@ def main():
     image_caption = get_response(captionservice_uri,"caption")
 
     # Check if there is a feature flag to show ratings
-    enable_ratings = bool(get_response(captionservice_uri,"enable_ratings"))
     ratings = "<!-- ratings: disabled -->"
-    if enable_ratings:
+    enable_ratings = get_response(captionservice_uri,"enable_ratings")
+    if (enable_ratings.lower() in ['true','1','yes']):
         HTML_file = open("templates/stars.html.tpl")
         ratings = HTML_file.read()
         HTML_file.close()
@@ -39,18 +39,18 @@ def get_response(uri,item_key):
     result_key = os.getenv('RESULT_KEY','body')
 
     if debug:
-        print("Trying to reach upstream: %s", uri)
+        print("Trying to reach upstream: %s" % uri)
 
     response = requests.get(uri).json()
 
     if debug:
-        print("Received json response from upstream: %s",response)
+        print("Received json response from upstream: %s" % response)
 
     if result_key in response and item_key in response[result_key]:
         value = response[result_key][item_key]
 
     else:
-        print("WARN: Could not find the key [%s][%s] or in response json, returning None",result_key,item_key)
+        print("WARN: Could not find the key [%s][%s] or in response json, returning None" %(result_key,item_key))
         value = None
 
     return value

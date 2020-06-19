@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hashicat-web
+  name: hashicat-web-v2
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: hashicat-web
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: hashicat-web
-        version: v1
+        version: v2
       annotations:
         'consul.hashicorp.com/connect-inject': 'true'
-        'consul.hashicorp.com/connect-service-upstreams': 'hashicat-image:80'
-        'consul.hashicorp.com/service-tags': 'v1'
-        'consul.hashicorp.com/service-meta-version': '1'
+        'consul.hashicorp.com/connect-service-upstreams': 'hashicat-url:8080, hashicat-metadata:9080'
+        'consul.hashicorp.com/service-tags': 'v2'
+        'consul.hashicorp.com/service-meta-version': '2'
     spec:
       containers:
         - name: hashicat-web
@@ -27,8 +27,8 @@ spec:
             - name: DEBUG
               value: "True"
             - name: URLSERVICE_URI
-              value: "http://127.0.0.1/url"
+              value: "http://127.0.0.1:8080"
             - name: METADATA_URI
-              value: "http://127.0.0.1/metadata"
+              value: "http://127.0.0.1:9080"
           ports:
           - containerPort: 5000
