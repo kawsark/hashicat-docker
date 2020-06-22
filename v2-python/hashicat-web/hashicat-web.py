@@ -26,7 +26,7 @@ def main():
     # Check if there is a feature flag to show ratings
     ratings = "<!-- ratings: disabled -->"
     enable_ratings = get_response(captionservice_uri,"enable_ratings")
-    if (enable_ratings.lower() in ['true','1','yes']):
+    if enable_ratings is not None and (enable_ratings.lower() in ['true','1','yes']):
         HTML_file = open("templates/stars.html.tpl")
         ratings = HTML_file.read()
         HTML_file.close()

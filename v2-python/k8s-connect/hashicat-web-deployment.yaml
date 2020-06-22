@@ -14,6 +14,7 @@ spec:
         app: hashicat-web
         version: v1
       annotations:
+        'consul.hashicorp.com/connect-service-protocol': 'http'
         'consul.hashicorp.com/connect-inject': 'true'
         'consul.hashicorp.com/connect-service-upstreams': 'hashicat-image:80'
         'consul.hashicorp.com/service-tags': 'v1'

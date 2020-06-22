@@ -6,7 +6,7 @@ name = hashicat-web
 
 all: clean build start
 
-build: 
+build: clean
 	docker build -t $(docker_username)/$(name):$(tag) .
 
 start: 

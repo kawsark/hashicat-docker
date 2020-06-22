@@ -1,16 +1,27 @@
+### Deploy the app locally on Docker
+```
+docker run -dit --name hashicat -p 9180:80 kawsark/hashicat:0.0.1
+```
+- Open browser to localhost:9180
+
+To modify the image properties and caption, you can set the environment variables: `PLACEHOLDER`, `WIDTH`, `HEIGHT`, and `PREFIX`. For example, we will modify the URL and Width below. 
+```
+docker rm -f hashicat
+docker run -dit -p 9180:80 --name hashicat -e PLACEHOLDER=placedog.net -e WIDTH=400 kawsark/hashicat:0.0.1
+```
+- Alternative URL examples: placedog.net, fillmurray.com, placecage.com, placebeard.it, loremflickr.com, baconmockup.com, placeimg.com, placebear.com, placeskull.com, stevensegallery.com.
+
 ### Building and Running the image locally
 - Edit [Dockerfile](scripts/Dockerfile) if needed
 ```
 docker build -t <user_name>/hashicat:0.0.1 .
-docker run -dit -p 8080:80 <user_name>/hashicat:0.0.1
+docker run -dit --name hashicat -p 9180:80 <user_name>/hashicat:0.0.1
 ```
-- Open browser to localhost:8080
+- Open browser to localhost:9180
 
 ### Deploying the app on Kubernetes
 ```
-cd k8s
-kubectl apply -f hashicat-deployment.yaml
-kubectl apply -f hashicat-service.yaml
+kubectl apply -f k8s
 kubectl get nodes -o wide
 kubectl get svc/hashicat-service
 ```
