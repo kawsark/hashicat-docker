@@ -5,7 +5,7 @@ node=$(kubectl get nodes -o=json | jq -r '.items[0].status.addresses[] | select(
 # Get Endpoints for Hashicat application
 for x in $@; do
   name=$x
-  check=$(kubectl get svc/$x)
+  check=$(kubectl get svc/$x 2>/dev/null)
   if [[ $? != 0 ]]; then
     echo "Looking for $x service name with a prefix ..."
     name=$(kubectl get svc | grep $x | awk '{print $1}')

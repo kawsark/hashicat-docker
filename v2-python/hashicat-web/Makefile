@@ -19,6 +19,9 @@ start:
 	docker port $(name)
 	echo "Access the app at forwarded port"
 
+start_local:
+	FLASK_APP=./hashicat-web.py python3 -m flask run --host=0.0.0.0
+
 clean:
 	docker rm -f $(name) || true
 	docker rmi $(docker_username)/$(name):$(tag) || true

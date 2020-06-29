@@ -23,7 +23,7 @@ routes = [
     }
 
     destination {
-      service = "hashicat-metadata",
+      service = "hashicat-metadata"
     }
   },
 ]

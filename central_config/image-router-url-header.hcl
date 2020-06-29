@@ -7,6 +7,12 @@ routes = [
   {
     match {
       http {
+        header = [
+          {
+            name  = "Hashicat-canary"
+            Exact = "True"
+          }
+        ],
         path_prefix = "/url"
       }
     }
