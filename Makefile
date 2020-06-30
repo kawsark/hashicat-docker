@@ -18,14 +18,17 @@ consul_http_addr:
 	kubectl apply -f ./v1-simple/k8s
 	scripts/nodeport.sh hashicat-service
 
-1_ingress:
+1_ingress:	
 	consul config write ./central_config/ingress1.hcl
 	scripts/nodeport.sh ingress-gateway
-
+	
 2_canary:
 	kubectl apply -f ./v2-python/k8s-connect
-	consul config write ./central_config/ingress2.hcl
+	consul config write ./central_config/ingress2.hcl	
 	scripts/nodeport.sh ingress-gateway
+
+2_routing:
+	consul config write central_config/hashicat-router.hcl
 
 3_routing:
 	kubectl apply -f ./v3-python-go/k8s-connect
@@ -57,6 +60,12 @@ list_intentions:
 	curl -s "${CONSUL_HTTP_ADDR}/v1/connect/intentions" \
 	| jq -r '.[] | [.SourceName, .DestinationName, .Action] | @csv' \
 	| sed -e s/','/' --> '/ -e s/','/': '/
+
+create_intentions:
+	scripts/create_intentions.sh
+
+delete_intentions:
+	scripts/delete_intentions.sh
 
 consul_info:
 	scripts/consul_info.sh
