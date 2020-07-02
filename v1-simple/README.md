@@ -17,7 +17,8 @@ docker run -dit -p 9180:80 --name hashicat -e PLACEHOLDER=placedog.net -e WIDTH=
 docker build -t <user_name>/hashicat:0.0.1 .
 docker run -dit --name hashicat -p 9180:80 <user_name>/hashicat:0.0.1
 ```
-- Open browser to localhost:9180
+- Open browser to localhost:9180 and you should see something like this.
+![HashiCat](Meow.png)
 
 ### Deploying the app on Kubernetes
 ```

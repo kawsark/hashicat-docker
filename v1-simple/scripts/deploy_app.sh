@@ -19,7 +19,7 @@ cat << EOM > /usr/local/apache2/htdocs/index.html
   <!-- BEGIN -->
   <center><img src="http://${PLACEHOLDER}/${WIDTH}/${HEIGHT}"></img></center>
   <center><h2>Meow World!</h2></center>
-  Welcome to ${PREFIX}'s Meowlicious app. 
+  <center>Welcome to ${PREFIX}'s Meowlicious app.</center>
   <!-- END -->
 
   </div>
