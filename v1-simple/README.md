@@ -32,3 +32,5 @@ kubectl get svc/hashicat-service
 ```
 curl -s http://<node_host>:<node_port>
 ```
+
+![HashiCat](Hashicat-Day1.png)
