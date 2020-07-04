@@ -6,7 +6,10 @@ $ cd hashicat-docker
 $ helm install consul-k8s hashicorp/consul -f helm/consul-k8s.values.yaml
 $ kubectl get pods
 ```
-In a few minutes you should have a consul cluster deployed with three healthy consul server pods ending in consul-server-0, consul-server-1 and consul-server-2. 
+In a few minutes you should have a consul cluster deployed with three healthy consul server pods ending in consul-server-0, consul-server-1 and consul-server-2. Below is a diagram of Consul deployment in Kubernetes.
+![Consul K8S Deployment](consul-k8s.png)
+
+
 
 For more detailed information, please see our learn guide track for [Consul on Kubernetes](https://learn.hashicorp.com/consul?track=kubernetes#kubernetes).
 For this demo, we need Consul 1.8 with Ingress Gateways and TLS enabled. This [Ingress Gateways blog post](https://www.hashicorp.com/blog/ingress-gateways-in-hashicorp-consul-1-8/?utm_source=linkedin) contains an example snippet of helm values.yaml file.
