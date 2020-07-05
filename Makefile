@@ -40,7 +40,7 @@ consul_http_addr:
 5_shifting:
 	kubectl apply -f ./v3-python-go/k8s-connect-traffic-shifting
 	consul config write ./central_config/metadata-resolver.hcl
-	consul config write ./central_config/metadata-splitter_0_100.hcl
+	consul config write ./central_config/metadata-splitter_100_0.hcl
 
 5_shifting_50:
 	consul config write ./central_config/metadata-resolver.hcl
@@ -48,7 +48,7 @@ consul_http_addr:
 
 5_shifting_100:
 	consul config write ./central_config/metadata-resolver.hcl
-	consul config write ./central_config/metadata-splitter_100_0.hcl
+	consul config write ./central_config/metadata-splitter_0_100.hcl
 
 root_certs:
 	curl -s "${CONSUL_HTTP_ADDR}/v1/connect/ca/roots" | jq .
