@@ -1,3 +1,6 @@
+#!/bin/bash
+# A script to parse the consul-ui kubernetes service and print out NodePort endpoint
+
 echo "Finding Node IP address from kubectl get nodes"
 node_ip=$(kubectl get nodes -o=json | jq -r '.items[0].status.addresses[] | select(.type == "ExternalIP") | .address')
 

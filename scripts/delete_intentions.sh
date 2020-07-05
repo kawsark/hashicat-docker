@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+# A script to delete all Intentions for the Hashicat application
 
 set +e
 echo "Note: you may get errors if an intention does not exist"

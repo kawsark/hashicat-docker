@@ -1,8 +1,9 @@
 #!/bin/bash
+# A script to parse kubernetes services and print out NodePort endpoints
+# Service names are passed as parameters
 
 node=$(kubectl get nodes -o=json | jq -r '.items[0].status.addresses[] | select(.type == "ExternalIP") | .address')
 
-# Get Endpoints for Hashicat application
 for x in $@; do
   name=$x
   check=$(kubectl get svc/$x 2>/dev/null)

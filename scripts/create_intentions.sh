@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+# A script to create all Intentions for the Hashicat application
 
 set +e
 echo "You may get errors if an intention already exists"
