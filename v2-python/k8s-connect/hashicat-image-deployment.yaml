@@ -22,7 +22,7 @@ spec:
       containers:
         - name: hashicat-image
           image: kawsark/hashicat-image:0.0.1
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
             - name: HASHICAT_URL
               value: "http://placekitten.com/700/700"

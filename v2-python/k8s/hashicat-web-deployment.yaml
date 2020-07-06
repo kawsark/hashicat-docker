@@ -16,7 +16,7 @@ spec:
       containers:
         - name: hashicat-web
           image: kawsark/hashicat-web:0.0.1
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
             - name: DEBUG
               value: "True"
